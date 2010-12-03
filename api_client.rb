@@ -8,7 +8,11 @@ APP_SECRET = '7pwWsVWjEeCixg75EHoyHHqLVRHIrXwgm4Fxkf8X'
 SITE       = 'https://qa.geni.com'
 
 def client
-  OAuth2::Client.new(APP_ID, APP_SECRET, :site => SITE, :parse_json => true)
+  OAuth2::Client.new(APP_ID, APP_SECRET,
+    :site => SITE,
+    :parse_json => true,
+    :access_token_path => '/oauth/token'
+  )
 end
 
 def redirect_uri
