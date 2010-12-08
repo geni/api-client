@@ -3,13 +3,14 @@ require 'sinatra'
 require 'oauth2'
 require 'json'
 require 'pp'
+require 'liquid'
 
 $LOAD_PATH.unshift File.dirname(File.expand_path(__FILE__)) + '/lib'
 require 'family'
 
-APP_ID     = 'uOfqRRZYc3iyva3nweWS'
-APP_SECRET = '7pwWsVWjEeCixg75EHoyHHqLVRHIrXwgm4Fxkf8X'
-SITE       = 'https://qa.geni.com'
+APP_ID     = 'OGVCFRGWsyZSpLvYSQqxS5v4O4GESIVYpENIya8n'
+APP_SECRET = 'asT35rBEXnWC54fa2C3IAPOeNMnpVUvkES49RZLE'
+SITE       = 'https://stage.geni.com'
 
 get '/' do
   liquid :index
