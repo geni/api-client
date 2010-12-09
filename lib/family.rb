@@ -18,7 +18,7 @@ class Family
   def names(group)
     send(group).collect do |node|
       "#{node['first_name']} #{node['last_name']}"
-    end
+    end.join(', ')
   end
 
   def parents
