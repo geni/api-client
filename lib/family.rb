@@ -12,6 +12,7 @@ class Family
       Parents: #{names(:parents)}
       Children: #{names(:children)}
       Partners: #{names(:partners)}
+      Siblings: #{names(:siblings)}
     }
   end
 
@@ -19,6 +20,10 @@ class Family
     send(group).collect do |node|
       "#{node['first_name']} #{node['last_name']}"
     end.join(', ')
+  end
+
+  def focus_name
+    "#{focus['first_name']} #{focus['last_name']}"
   end
 
   def parents
@@ -33,11 +38,16 @@ class Family
     walk(focus, ['partner', 'child'])
   end
 
+  def siblings
+    walk(focus, ['child', 'child'])
+  end
+
   def walk(node, rels)
     node = node(node) if node.kind_of?(String)
     return node if rels.empty?
 
-    rel = rels.shift
+    rels = rels.clone
+    rel  = rels.shift
     node['edges'].collect do |id, edge|
       if edge['rel'] == rel and id != focus_id 
         walk(id, rels)

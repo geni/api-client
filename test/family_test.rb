@@ -7,18 +7,27 @@ context 'A simple family' do
   end
 
   test 'partners' do
-    assert_equal ['Wendy Elliston'], @family.names(:partners)
+    assert_equal 'Wendy Elliston', @family.names(:partners)
   end
 
   test 'children' do
-    assert_equal [], @family.names(:children)
+    assert_equal '', @family.names(:children)
   end
 
   test 'parents' do
-    assert_equal ['Mike Elliston', 'Marg Elliston'], @family.names(:parents)
+    assert_equal "Mike Elliston, Marg Elliston", @family.names(:parents)
   end
 
   test 'handprint' do
     assert_match 'Parents', @family.handprint
+  end
+end
+
+context 'Divorced family' do
+  setup do
+    @family = Family.new(DIVORCED_FAMILY)
+  end
+  test 'partners' do
+    assert_equal 'Michael Elliston, Fred Harris, Fred Harris', @family.names(:partners)
   end
 end

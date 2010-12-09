@@ -31,10 +31,18 @@ end
 get '/family' do
   redirect '/' unless request.cookies['token']
 
-  token  = OAuth2::AccessToken.new(client, request.cookies['token'])
-  pid    = "-#{params[:pid]}" if params[:pid]
-  family = Family.new(token.get("/api/profile#{pid}/immediate-family"))
-  liquid :family, :locals => {:handprint => (family && family.handprint)} 
+  begin
+    token  = OAuth2::AccessToken.new(client, request.cookies['token'])
+    pid    = "-#{params[:pid]}" if params[:pid]
+    family = Family.new(token.get("/api/profile#{pid}/immediate-family"))
+    liquid :family, :locals => {:handprint => (family && family.handprint), :focus => (family && family.focus_name) } 
+  rescue OAuth2::HTTPError => e
+    body = JSON.parse(e.response.body)
+    if body.is_a?(Hash) and body.key?('error')
+      message = body['error']['message']
+    end
+    liquid :family, :locals => {:error => e.message, :message => message}
+  end
 end
 
 def client
