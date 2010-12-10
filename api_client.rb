@@ -32,9 +32,9 @@ get '/family' do
   redirect '/' unless request.cookies['token']
 
   begin
-    token  = OAuth2::AccessToken.new(client, request.cookies['token'])
-    pid    = "-#{params[:pid]}" if params[:pid]
-    family = Family.new(token.get("/api/profile#{pid}/immediate-family"))
+    token   = OAuth2::AccessToken.new(client, request.cookies['token'])
+    node_id = "-#{params[:node_id]}" if params[:node_id]
+    family  = Family.new(token.get("/api/profile#{node_id}/immediate-family"))
     liquid :family, :locals => {:handprint => (family && family.handprint), :focus => (family && family.focus_name) } 
   rescue OAuth2::HTTPError => e
     body = JSON.parse(e.response.body)

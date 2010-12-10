@@ -64,14 +64,6 @@ class Family
   end
 
   def focus_id
-    pid(family['focus']['id'])
-  end
-
-  def pid(id)
-    "profile-#{id}"
-  end
-
-  def uid(id)
-    "union-#{id}"
+    family['focus']['id']
   end
 end
