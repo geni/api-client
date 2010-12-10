@@ -7,15 +7,15 @@ context 'A simple family' do
   end
 
   test 'partners' do
-    assert_equal 'Wendy Elliston', @family.names(:partners)
+    assert_equal 'Wendy Spero', @family.names(:partners)
   end
 
   test 'children' do
-    assert_equal '', @family.names(:children)
+    assert_equal 'Penelope Elliston', @family.names(:children)
   end
 
   test 'parents' do
-    assert_equal "Mike Elliston, Marg Elliston", @family.names(:parents)
+    assert_equal "Marg Elliston, Michael Elliston", @family.names(:parents)
   end
 
   test 'handprint' do
@@ -28,6 +28,6 @@ context 'Divorced family' do
     @family = Family.new(DIVORCED_FAMILY)
   end
   test 'partners' do
-    assert_equal 'Michael Elliston, Fred Harris, Fred Harris', @family.names(:partners)
+    assert_equal 'Fred Harris, Fred Harris, Michael Elliston', @family.names(:partners)
   end
 end
