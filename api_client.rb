@@ -10,7 +10,7 @@ require 'family'
 
 APP_ID     = 'OGVCFRGWsyZSpLvYSQqxS5v4O4GESIVYpENIya8n'
 APP_SECRET = 'asT35rBEXnWC54fa2C3IAPOeNMnpVUvkES49RZLE'
-SITE       = 'https://stage.geni.com'
+SITE       = 'https://www.geni.com'
 
 get '/' do
   liquid :index
