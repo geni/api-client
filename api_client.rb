@@ -8,9 +8,10 @@ require 'liquid'
 $LOAD_PATH.unshift File.dirname(File.expand_path(__FILE__)) + '/lib'
 require 'family'
 
-APP_ID     = "soBF9iHf76pSBfkq32uKxXDD8dNXQLxyjupKIAYJ"
-APP_SECRET = "lhOmcTvW6ApFlOv44rMG3Pwmk13GGlGTpngINzFS"
-SITE       = 'http://frasier:3000'
+APP_ID     = 'OGVCFRGWsyZSpLvYSQqxS5v4O4GESIVYpENIya8n'
+APP_SECRET = 'asT35rBEXnWC54fa2C3IAPOeNMnpVUvkES49RZLE'
+SITE       = 'https://www.geni.com'
+
 
 get '/' do
   liquid :index
