@@ -8,8 +8,9 @@ require 'liquid'
 $LOAD_PATH.unshift File.dirname(File.expand_path(__FILE__)) + '/lib'
 require 'family'
 
-APP_ID     = 'OGVCFRGWsyZSpLvYSQqxS5v4O4GESIVYpENIya8n'
-APP_SECRET = 'asT35rBEXnWC54fa2C3IAPOeNMnpVUvkES49RZLE'
+# please go to http://www.geni.com/apps to obtain an app_id and app_secret
+APP_ID     = '<app-id>'
+APP_SECRET = '<app-secret>'
 SITE       = 'https://www.geni.com'
 
 
