@@ -8,9 +8,9 @@ require 'liquid'
 $LOAD_PATH.unshift File.dirname(File.expand_path(__FILE__)) + '/lib'
 require 'family'
 
-APP_ID     = 'OGVCFRGWsyZSpLvYSQqxS5v4O4GESIVYpENIya8n'
-APP_SECRET = 'asT35rBEXnWC54fa2C3IAPOeNMnpVUvkES49RZLE'
-SITE       = 'https://www.geni.com'
+APP_ID     = "soBF9iHf76pSBfkq32uKxXDD8dNXQLxyjupKIAYJ"
+APP_SECRET = "lhOmcTvW6ApFlOv44rMG3Pwmk13GGlGTpngINzFS"
+SITE       = 'http://frasier:3000'
 
 get '/' do
   liquid :index
@@ -23,7 +23,7 @@ get '/auth' do
 end
 
 get '/callback' do
-  token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+  token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri.tap{|ii| puts ii})
   response.set_cookie('token', :value => token.token)
   redirect '/family'
 end
@@ -58,4 +58,13 @@ def redirect_uri
   uri.path = '/callback'
   uri.query = nil
   uri.to_s
+end
+
+class OAuth2::AccessToken
+  # fix bug introduced in https://github.com/intridea/oauth2/commit/607af1ca78fa20b796de6260aa143117bc712551
+  def request(verb, path, params = {}, headers = {})
+    params = params.merge token_param => @token
+    headers = headers.merge 'Authorization' => "Token token=\"#{@token}\""
+    @client.request(verb, path, params, headers)
+  end
 end
