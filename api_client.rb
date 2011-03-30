@@ -63,7 +63,7 @@ def redirect_uri
 end
 
 class OAuth2::AccessToken
-  # fix bug introduced in https://github.com/intridea/oauth2/commit/607af1ca78fa20b796de6260aa143117bc712551
+  # fix to work with latest OAuth 2.0 spec.
   def request(verb, path, params = {}, headers = {})
     params = params.merge token_param => @token
     headers = headers.merge 'Authorization' => "Token token=\"#{@token}\""
