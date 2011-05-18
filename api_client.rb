@@ -61,12 +61,3 @@ def redirect_uri
   uri.query = nil
   uri.to_s
 end
-
-class OAuth2::AccessToken
-  # fix to work with latest OAuth 2.0 spec.
-  def request(verb, path, params = {}, headers = {})
-    params = params.merge token_param => @token
-    headers = headers.merge 'Authorization' => "Token token=\"#{@token}\""
-    @client.request(verb, path, params, headers)
-  end
-end
